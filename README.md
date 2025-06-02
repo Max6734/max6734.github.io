@@ -1,1 +1,109 @@
 # Max.github.io
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Site de Voitures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .car-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .car {
+            background: #ecf0f1;
+            border-radius: 6px;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .car img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .car img:hover {
+            transform: scale(1.05);
+        }
+        button {
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #1c5d86;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur le site des voitures</h1>
+    </header>
+    <main>
+        <h1>Page d'accueil</h1>
+        <p>Clique sur une image pour sélectionner une voiture, puis appuie sur le bouton pour voir ses informations :</p>
+        <div id="images-voitures" style="display: flex; justify-content: center; gap: 20px;">
+            <img src="images.jpg" alt="Peugeot" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('peugeot', this)">
+            <img src="images1.jpg" alt="Renault" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('renault', this)">
+            <img src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="BMW" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('BMW', this)">
+        </div>
+        <button onclick="voirInfoVoiture()">Voir les informations de la voiture sélectionnée</button>
+        <div id="message"></div>
+    </main>
+    <script>
+        let voitureSelectionnee = null;
+        function selectionnerVoiture(nom, imgElement) {
+            voitureSelectionnee = nom;
+            // Retire la bordure de toutes les images
+            document.querySelectorAll('#images-voitures img').forEach(img => {
+                img.style.border = '2px solid transparent';
+            });
+            // Ajoute une bordure à l'image sélectionnée
+            imgElement.style.border = '2px solid #2980b9';
+            document.getElementById('message').textContent = 'Voiture sélectionnée : ' + imgElement.alt;
+        }
+        function voirInfoVoiture() {
+            if (voitureSelectionnee) {
+                window.location.href = 'autrepage.html?car=' + voitureSelectionnee;
+            } else {
+                document.getElementById('message').textContent = 'Veuillez d\'abord sélectionner une voiture.';
+            }
+        }
+    </script>
+</body>
+</html>
