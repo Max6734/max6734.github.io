@@ -14,40 +14,38 @@
         const car = params.get('car');
 
         // Informations sur les voitures
-        const carsInfo = {
-            peugeot: {
-                marque: "Peugeot",
-                modele: "208",
-                annee: 2022,
-                couleur: "Bleu",
-                prix: "23 000 €",
-                puissance: "130 ch"
-            },
-            renault: {
-                marque: "Renault",
-                modele: "Clio",
-                annee: 2021,
-                couleur: "Rouge",
-                prix: "19 500 €",
-                puissance: "100 ch"
-            },
-           bmw: { // <-- ici en minuscules !
-            marque: "BMW",
-            modele: "M4 Competition",
-            annee: 2016,
-            couleur: "Tanzanite Blue",
-            prix: "85 000 €",
-            puissance: "510 ch"
-            }
-        };
+       const carsInfo = {
+    peugeot: {
+        marque: "Peugeot",
+        modele: "208",
+        annee: 2022,
+        couleur: "Bleu",
+        prix: "23 000 €",
+        puissance: "130 ch"
+    },
+    renault: {
+        marque: "Renault",
+        modele: "Clio",
+        annee: 2021,
+        couleur: "Rouge",
+        prix: "19 500 €",
+        puissance: "100 ch"
+    },
+    bmw: { // <-- CORRECTION ici
+        marque: "BMW",
+        modele: "M4 Competition",
+        annee: 2016,
+        couleur: "Tanzanite Blue",
+        prix: "85 000 €",
+        puissance: "510 ch"
+    }
+};
 
-        // Images principales pour chaque voiture
-        const imagesPrincipales = {
-            peugeot: 'images.jpg',
-            renault: 'images1.jpg',
-            bmw: 'bmw_m4competitionmxdrivecp2fb_concept.jpg'
-        };
-
+const imagesPrincipales = {
+    peugeot: 'images.jpg',
+    renault: 'images1.jpg',
+    bmw: 'bmw_m4competitionmxdrivecp2fb_concept.jpg' // <-- CORRECTION ici
+};
         // Affiche les informations si la voiture existe
         if (car && carsInfo[car]) {
             const info = carsInfo[car];
