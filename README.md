@@ -13,7 +13,8 @@ Cliquez sur une image pour choisir une voiture, puis cliquez sur le bouton pour 
 
 ## Aperçu
 
-### Peugeot
+
+### Peugeote
 ![Aperçu Peugeot](images.jpg)
 
 ### Renault
