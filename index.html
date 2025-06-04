@@ -4,66 +4,67 @@
     <meta charset="UTF-8">
     <title>Site de Voitures</title>
     <style>
-body {
-  background-image: url('car_logo_converted.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-#background-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255,255,255,0.65);  
-  z-index: 0;
-  pointer-events: none;
-}
-main, header, footer, #images-voitures, #message {
-  position: relative;
-  z-index: 1;
-}
+        body {
+            background-image: url('car_logo_converted.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding-top: 70px; /* espace pour la navbar */
+            font-family: Arial, sans-serif;
+        }
+        #background-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.4); /* Plus transparent pour voir le logo */
+            z-index: 0;
+            pointer-events: none;
+        }
+        main, header, footer, #images-voitures, #message {
+            position: relative;
+            z-index: 1;
+        }
+        /* Barre de navigation */
         #navbar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  background: rgba(25, 118, 210, 0.9);
-  padding: 0.5em 0;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-#navbar ul {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-#navbar ul li {
-  margin: 0 1em;
-}
-#navbar ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  letter-spacing: 1px;
-  transition: color 0.2s;
-}
-#navbar ul li a:hover {
-  color: #ffd700;
-}
-body {
-  padding-top: 60px; /* Ajoute un espace pour la barre */
-}
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(25, 118, 210, 0.92);
+            padding: 12px 0;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        #navbar ul {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #navbar ul li {
+            margin: 0 1em;
+        }
+        #navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+            font-size: 1.1em;
+        }
+        #navbar ul li a:hover {
+            color: #ffd700;
+        }
     </style>
 </head>
 <body>
     <nav id="navbar">
-  <ul>
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="#images-voitures">Voitures</a></li>
-    <li><a href="autrepage.html">Infos</a></li>
-  </ul>
-</nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="#images-voitures">Voitures</a></li>
+            <li><a href="autrepage.html">Infos</a></li>
+        </ul>
+    </nav>
     <div id="background-overlay"></div>
     <header>
         <h1>Bienvenue sur le site des voitures</h1>
@@ -99,8 +100,3 @@ body {
     </script>
 </body>
 </html>
-
-
-
-
-
