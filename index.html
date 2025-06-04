@@ -23,9 +23,47 @@ main, header, footer, #images-voitures, #message {
   position: relative;
   z-index: 1;
 }
+        #navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(25, 118, 210, 0.9);
+  padding: 0.5em 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+#navbar ul {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#navbar ul li {
+  margin: 0 1em;
+}
+#navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+#navbar ul li a:hover {
+  color: #ffd700;
+}
+body {
+  padding-top: 60px; /* Ajoute un espace pour la barre */
+}
     </style>
 </head>
 <body>
+    <nav id="navbar">
+  <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="#images-voitures">Voitures</a></li>
+    <li><a href="autrepage.html">Infos</a></li>
+  </ul>
+</nav>
     <div id="background-overlay"></div>
     <header>
         <h1>Bienvenue sur le site des voitures</h1>
