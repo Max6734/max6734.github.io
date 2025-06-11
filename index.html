@@ -65,16 +65,15 @@
             flex: 1 1 300px;
             max-width: 300px;
         }
-
         /* --- Boutons modernes --- */
-        button, .bouton-comparateur {
+        button {
             font-size: 18px;
             padding: 12px 28px;
             margin-top: 20px;
             cursor: pointer;
             border: none;
             border-radius: 30px;
-            background: linear-gradient(90deg, #1976d2 40%, #43a047 100%);
+            background: linear-gradient(90deg, #ff9800 40%, #f44336 100%);
             color: #fff;
             font-weight: bold;
             box-shadow: 0 4px 14px 0 rgba(25,118,210,0.12);
@@ -83,33 +82,50 @@
             align-items: center;
             gap: 8px;
         }
-        button:hover, .bouton-comparateur:hover, button:focus, .bouton-comparateur:focus {
-            background: linear-gradient(90deg, #43a047 40%, #1976d2 100%);
+        button:hover, button:focus {
+            background: linear-gradient(90deg, #f44336 40%, #ff9800 100%);
             transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 6px 18px 0 rgba(25,118,210,0.14);
+            box-shadow: 0 6px 18px 0 rgba(244,67,54,0.15);
             outline: none;
         }
-        /* Style différent pour le bouton de comparaison */
-        .bouton-comparateur {
+        /* --- Style custom pour les selects du comparateur --- */
+        .select-styled {
+            font-size: 18px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
             background: linear-gradient(90deg, #ff9800 40%, #f44336 100%);
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 4px 14px 0 rgba(25,118,210,0.12);
+            transition: background 0.25s, transform 0.18s, box-shadow 0.18s;
+            margin: 10px 10px 0 0;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
-        .bouton-comparateur:hover, .bouton-comparateur:focus {
+        .select-styled:hover, .select-styled:focus {
             background: linear-gradient(90deg, #f44336 40%, #ff9800 100%);
+            transform: translateY(-2px) scale(1.04);
             box-shadow: 0 6px 18px 0 rgba(244,67,54,0.15);
+            outline: none;
         }
-
-        /* === Comparateur de voitures === */
+        /* Petite flèche custom pour les selects */
         .select-container {
-            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
         }
-        select {
-            padding: 10px;
+        .select-container::after {
+            content: "▼";
+            color: #fff;
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
             font-size: 16px;
-            margin: 10px;
-            border-radius: 8px;
-            border: 1px solid #1976d2;
-            background: #fff;
         }
+        /* === Comparateur de voitures === */
         .comparison {
             display: flex;
             justify-content: center;
@@ -154,14 +170,17 @@
         <!-- === Comparateur de voitures === -->
         <section id="comparateur-section" style="margin-top:40px;">
             <h2>Comparateur de voitures</h2>
-            <div class="select-container">
-                <select id="car1-select">
-                    <option value="">-- Choisir voiture 1 --</option>
-                </select>
-                <select id="car2-select">
-                    <option value="">-- Choisir voiture 2 --</option>
-                </select>
-                <button class="bouton-comparateur" onclick="comparerVoitures()">Comparer</button>
+            <div>
+                <span class="select-container">
+                    <select id="car1-select" class="select-styled">
+                        <option value="">-- Choisir voiture 1 --</option>
+                    </select>
+                </span>
+                <span class="select-container">
+                    <select id="car2-select" class="select-styled">
+                        <option value="">-- Choisir voiture 2 --</option>
+                    </select>
+                </span>
             </div>
             <div class="comparison">
                 <div id="car1-info" class="car-info"></div>
@@ -236,10 +255,6 @@
                 <p><strong>Année :</strong> ${car.annee}</p>
                 <p><strong>Prix :</strong> ${car.prix}</p>
             `;
-        }
-        function comparerVoitures() {
-            displayCarInfoComparateur(car1Select.value, "car1-info");
-            displayCarInfoComparateur(car2Select.value, "car2-info");
         }
 
         if (car1Select && car2Select) {
