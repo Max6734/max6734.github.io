@@ -65,12 +65,39 @@
             flex: 1 1 300px;
             max-width: 300px;
         }
-        button {
+
+        /* --- Boutons modernes --- */
+        button, .bouton-comparateur {
             font-size: 18px;
-            padding: 10px 20px;
+            padding: 12px 28px;
             margin-top: 20px;
             cursor: pointer;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #1976d2 40%, #43a047 100%);
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 4px 14px 0 rgba(25,118,210,0.12);
+            transition: background 0.25s, transform 0.18s, box-shadow 0.18s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
+        button:hover, .bouton-comparateur:hover, button:focus, .bouton-comparateur:focus {
+            background: linear-gradient(90deg, #43a047 40%, #1976d2 100%);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 18px 0 rgba(25,118,210,0.14);
+            outline: none;
+        }
+        /* Style différent pour le bouton de comparaison */
+        .bouton-comparateur {
+            background: linear-gradient(90deg, #ff9800 40%, #f44336 100%);
+        }
+        .bouton-comparateur:hover, .bouton-comparateur:focus {
+            background: linear-gradient(90deg, #f44336 40%, #ff9800 100%);
+            box-shadow: 0 6px 18px 0 rgba(244,67,54,0.15);
+        }
+
         /* === Comparateur de voitures === */
         .select-container {
             margin-bottom: 20px;
@@ -79,6 +106,9 @@
             padding: 10px;
             font-size: 16px;
             margin: 10px;
+            border-radius: 8px;
+            border: 1px solid #1976d2;
+            background: #fff;
         }
         .comparison {
             display: flex;
@@ -115,7 +145,10 @@
             <img class="voiture" src="images1.jpg" alt="Renault" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('renault', this)">
             <img class="voiture" src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="BMW" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('bmw', this)">
         </div>
-        <button onclick="voirInfoVoiture()">Voir les informations de la voiture sélectionnée</button>
+        <button onclick="voirInfoVoiture()">
+            <span style="font-size:1.3em;">🚗</span>
+            Voir les infos voiture choisie
+        </button>
         <div id="message"></div>
 
         <!-- === Comparateur de voitures === -->
@@ -128,6 +161,8 @@
                 <select id="car2-select">
                     <option value="">-- Choisir voiture 2 --</option>
                 </select>
+                <!-- (Bouton pour le comparateur, si tu veux une action supplémentaire) -->
+                <!-- <button class="bouton-comparateur">Comparer</button> -->
             </div>
             <div class="comparison">
                 <div id="car1-info" class="car-info"></div>
