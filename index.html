@@ -161,8 +161,7 @@
                 <select id="car2-select">
                     <option value="">-- Choisir voiture 2 --</option>
                 </select>
-                <!-- (Bouton pour le comparateur, si tu veux une action supplémentaire) -->
-                <!-- <button class="bouton-comparateur">Comparer</button> -->
+                <button class="bouton-comparateur" onclick="comparerVoitures()">Comparer</button>
             </div>
             <div class="comparison">
                 <div id="car1-info" class="car-info"></div>
@@ -237,6 +236,10 @@
                 <p><strong>Année :</strong> ${car.annee}</p>
                 <p><strong>Prix :</strong> ${car.prix}</p>
             `;
+        }
+        function comparerVoitures() {
+            displayCarInfoComparateur(car1Select.value, "car1-info");
+            displayCarInfoComparateur(car2Select.value, "car2-info");
         }
 
         if (car1Select && car2Select) {
