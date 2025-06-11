@@ -26,7 +26,6 @@
             position: relative;
             z-index: 1;
         }
-        /* Barre de navigation */
         #navbar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -56,8 +55,6 @@
         #navbar ul li a:hover {
             color: #ffd700;
         }
-
-        /* Mise en page des voitures */
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -69,11 +66,33 @@
             max-width: 300px;
         }
         button {
-  font-size: 18px;
-  padding: 10px 20px;
-  margin-top: 20px;
-  cursor: pointer;
-}
+            font-size: 18px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        /* === Comparateur de voitures === */
+        .select-container {
+            margin-bottom: 20px;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .comparison {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .car-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -98,8 +117,27 @@
         </div>
         <button onclick="voirInfoVoiture()">Voir les informations de la voiture sélectionnée</button>
         <div id="message"></div>
+
+        <!-- === Comparateur de voitures === -->
+        <section id="comparateur-section" style="margin-top:40px;">
+            <h2>Comparateur de voitures</h2>
+            <div class="select-container">
+                <select id="car1-select">
+                    <option value="">-- Choisir voiture 1 --</option>
+                </select>
+                <select id="car2-select">
+                    <option value="">-- Choisir voiture 2 --</option>
+                </select>
+            </div>
+            <div class="comparison">
+                <div id="car1-info" class="car-info"></div>
+                <div id="car2-info" class="car-info"></div>
+            </div>
+        </section>
+        <!-- === Fin comparateur === -->
     </main>
     <script>
+        // -- Code sélection image --
         let voitureSelectionnee = null;
         function selectionnerVoiture(nom, imgElement) {
             voitureSelectionnee = nom;
@@ -115,6 +153,67 @@
             } else {
                 document.getElementById('message').textContent = 'Veuillez d\'abord sélectionner une voiture.';
             }
+        }
+
+        // === Comparateur de voitures ===
+        const voitures = [
+            {
+                nom: "Peugeot 208",
+                puissance: "100 ch",
+                annee: 2022,
+                prix: "17 000 €"
+            },
+            {
+                nom: "Renault Clio",
+                puissance: "90 ch",
+                annee: 2021,
+                prix: "16 500 €"
+            },
+            {
+                nom: "BMW Série 1",
+                puissance: "140 ch",
+                annee: 2023,
+                prix: "28 000 €"
+            }
+        ];
+
+        const car1Select = document.getElementById("car1-select");
+        const car2Select = document.getElementById("car2-select");
+
+        function populateSelectComparateur(select) {
+            voitures.forEach((car, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = car.nom;
+                select.appendChild(option);
+            });
+        }
+
+        function displayCarInfoComparateur(index, elementId) {
+            const container = document.getElementById(elementId);
+            if (index === "" || index === null) {
+                container.innerHTML = "";
+                return;
+            }
+            const car = voitures[index];
+            container.innerHTML = `
+                <h3>${car.nom}</h3>
+                <p><strong>Puissance :</strong> ${car.puissance}</p>
+                <p><strong>Année :</strong> ${car.annee}</p>
+                <p><strong>Prix :</strong> ${car.prix}</p>
+            `;
+        }
+
+        if (car1Select && car2Select) {
+            car1Select.addEventListener("change", () => {
+                displayCarInfoComparateur(car1Select.value, "car1-info");
+            });
+            car2Select.addEventListener("change", () => {
+                displayCarInfoComparateur(car2Select.value, "car2-info");
+            });
+
+            populateSelectComparateur(car1Select);
+            populateSelectComparateur(car2Select);
         }
     </script>
 </body>
