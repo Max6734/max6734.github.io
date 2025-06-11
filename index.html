@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site de Voitures</title>
     <style>
         body {
@@ -55,6 +56,18 @@
         #navbar ul li a:hover {
             color: #ffd700;
         }
+
+        /* Mise en page des voitures */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .voiture {
+            flex: 1 1 300px;
+            max-width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -62,8 +75,7 @@
         <ul>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="#images-voitures">Voitures</a></li>
-            <li><a href="information.html">information</a></li>
-            
+            <li><a href="information.html">Information</a></li>
         </ul>
     </nav>
     <div id="background-overlay"></div>
@@ -73,10 +85,10 @@
     <main>
         <h1>Page d'accueil</h1>
         <p>Clique sur une image pour sélectionner une voiture, puis appuie sur le bouton pour voir ses informations :</p>
-        <div id="images-voitures" style="display: flex; justify-content: center; gap: 20px;">
-            <img src="images.jpg" alt="Peugeot" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('peugeot', this)">
-            <img src="images1.jpg" alt="Renault" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('renault', this)">
-            <img src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="bmw" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('bmw', this)">
+        <div class="container" id="images-voitures">
+            <img class="voiture" src="images.jpg" alt="Peugeot" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('peugeot', this)">
+            <img class="voiture" src="images1.jpg" alt="Renault" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('renault', this)">
+            <img class="voiture" src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="BMW" style="width:200px; height:120px; object-fit:cover; cursor:pointer; border:2px solid transparent;" onclick="selectionnerVoiture('bmw', this)">
         </div>
         <button onclick="voirInfoVoiture()">Voir les informations de la voiture sélectionnée</button>
         <div id="message"></div>
