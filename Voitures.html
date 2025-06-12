@@ -57,7 +57,6 @@
         h1 {
             text-align: center;
         }
-        /* Galerie d'images */
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -71,13 +70,30 @@
             object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-            transition: transform 0.18s, box-shadow 0.15s;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: border 0.2s;
         }
-        .voiture:hover {
-            transform: scale(1.04);
-            box-shadow: 0 4px 18px 0 rgba(25,118,210,0.15);
+        .voiture.selected {
+            border: 3px solid #ff9800;
         }
-        /* Comparateur */
+        .voir-info-btn {
+            font-size: 18px;
+            padding: 10px 24px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #ff9800 40%, #f44336 100%);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 24px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .voir-info-btn.active {
+            opacity: 1;
+            cursor: pointer;
+        }
+        /* Comparateur styles inchangés */
         .select-styled {
             font-size: 18px;
             padding: 12px 28px;
@@ -166,16 +182,12 @@
     <h1>Galerie de voitures</h1>
 
     <div class="container">
-        <img class="voiture" src="images.jpg" alt="Peugeot">
-        <img class="voiture" src="images1.jpg" alt="Renault">
-        <img class="voiture" src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="BMW">
+        <img class="voiture" src="images.jpg" alt="Peugeot 208" data-link="peugeot208.html">
+        <img class="voiture" src="images1.jpg" alt="Renault Clio" data-link="renaultclio.html">
+        <img class="voiture" src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="BMW M4" data-link="bmwm4.html">
     </div>
-
-    <!-- Un seul bouton sous la galerie -->
-    <div style="text-align: center; margin-top: 20px;">
-        <button onclick="window.location.href='autrepage.html'" style="font-size: 18px; padding: 10px 24px; border-radius: 8px; background: linear-gradient(90deg, #ff9800 40%, #f44336 100%); color: #fff; border: none; cursor: pointer;">
-            Voir les informations
-        </button>
+    <div style="text-align: center;">
+        <button id="voirInfoBtn" class="voir-info-btn" disabled>Voir les informations</button>
     </div>
 
     <!-- Comparateur de voitures -->
@@ -201,8 +213,28 @@
     <!-- Fin comparateur -->
 
     <script>
+        // Sélection et bouton infos voitures
+        const voitures = document.querySelectorAll('.voiture');
+        const btn = document.getElementById('voirInfoBtn');
+        let selected = null;
+        voitures.forEach(voiture => {
+            voiture.addEventListener('click', () => {
+                voitures.forEach(v => v.classList.remove('selected'));
+                voiture.classList.add('selected');
+                btn.disabled = false;
+                btn.classList.add('active');
+                selected = voiture;
+            });
+        });
+        btn.addEventListener('click', () => {
+            if (selected) {
+                // Redirige vers la page spécifique à la voiture sélectionnée
+                window.location.href = selected.getAttribute('data-link');
+            }
+        });
+
         // === Comparateur de voitures ===
-        const voitures = [
+        const voituresData = [
             {
                 nom: "Peugeot 208",
                 puissance: "130 ch",
@@ -227,7 +259,7 @@
         const car2Select = document.getElementById("car2-select");
 
         function populateSelectComparateur(select) {
-            voitures.forEach((car, index) => {
+            voituresData.forEach((car, index) => {
                 const option = document.createElement("option");
                 option.value = index;
                 option.textContent = car.nom;
@@ -241,7 +273,7 @@
                 container.innerHTML = "";
                 return;
             }
-            const car = voitures[index];
+            const car = voituresData[index];
             container.innerHTML = `
                 <h3>${car.nom}</h3>
                 <p><strong>Puissance :</strong> ${car.puissance}</p>
