@@ -1,1 +1,91 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Galerie de Voitures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .voiture {
+            width: 200px;
+            height: 120px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            transition: border 0.2s;
+        }
+        .voiture.selected {
+            border: 2px solid #2980b9;
+        }
+        button {
+            display: block;
+            margin: 30px auto 10px auto;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            background: linear-gradient(90deg, #ff9800 40%, #f44336 100%);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 14px 0 rgba(25,118,210,0.12);
+            transition: background 0.25s, transform 0.18s, box-shadow 0.18s;
+        }
+        button:hover, button:focus {
+            background: linear-gradient(90deg, #f44336 40%, #ff9800 100%);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 18px 0 rgba(244,67,54,0.15);
+            outline: none;
+        }
+        #message {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Galerie de voitures</h1>
+    <div class="container" id="images-voitures">
+        <img class="voiture" src="images.jpg" alt="Peugeot" onclick="selectionnerVoiture('peugeot', this)">
+        <img class="voiture" src="images1.jpg" alt="Renault" onclick="selectionnerVoiture('renault', this)">
+        <img class="voiture" src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="BMW" onclick="selectionnerVoiture('bmw', this)">
+    </div>
+    <button onclick="voirInfoVoiture()">Voir les infos voiture choisie</button>
+    <div id="message"></div>
+    <script>
+        let voitureSelectionnee = null;
+        function selectionnerVoiture(nom, imgElement) {
+            voitureSelectionnee = nom;
+            document.querySelectorAll('#images-voitures img').forEach(img => {
+                img.classList.remove('selected');
+            });
+            imgElement.classList.add('selected');
+            document.getElementById('message').textContent = 'Voiture sélectionnée : ' + imgElement.alt;
+        }
+        function voirInfoVoiture() {
+            if (voitureSelectionnee) {
+                window.location.href = 'autrepage.html?car=' + voitureSelectionnee;
+            } else {
+                document.getElementById('message').textContent = 'Veuillez d\'abord sélectionner une voiture.';
+            }
+        }
+    </script>
+</body>
+</html>
