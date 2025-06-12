@@ -91,18 +91,19 @@
             outline: none;
         }
         @media (max-width: 600px) {
-            #navbar ul {
-                flex-direction: row;
-                align-items: center;
-            }
-            #navbar ul li {
-                margin: 0.5em 0;
-            }
-            .container {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
+    #navbar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #navbar ul li {
+        margin: 0.5em 0.7em;
+    }
+    .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
         /* Centrage du texte sur toute la page */
         body, main, header, nav, footer {
             text-align: center;
