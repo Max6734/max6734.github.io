@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             background: #f2f2f2;
             margin: 0;
-            padding: 70px 20px 20px 20px; /* padding-top pour la navbar */
+            padding: 70px 20px 20px 20px;
         }
         #navbar {
             position: fixed;
@@ -46,52 +46,55 @@
         h1 {
             text-align: center;
         }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 40px;
-        }
-        .voiture {
-            width: 200px;
-            height: 120px;
-            object-fit: cover;
-            cursor: pointer;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            transition: border 0.2s;
-        }
-        .voiture.selected {
-            border: 2px solid #2980b9;
-        }
-        button {
-            display: block;
-            margin: 30px auto 10px auto;
-            padding: 12px 30px;
-            font-size: 1.1em;
-            background: linear-gradient(90deg, #ff9800 40%, #f44336 100%);
-            color: #fff;
+        /* --- Style custom pour les selects du comparateur --- */
+        .select-styled {
+            font-size: 18px;
+            padding: 12px 28px;
             border: none;
             border-radius: 30px;
+            background: linear-gradient(90deg, #ff9800 40%, #f44336 100%);
+            color: #111;
             font-weight: bold;
-            cursor: pointer;
             box-shadow: 0 4px 14px 0 rgba(25,118,210,0.12);
             transition: background 0.25s, transform 0.18s, box-shadow 0.18s;
+            margin: 10px 10px 0 0;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
-        button:hover, button:focus {
+        .select-styled:hover, .select-styled:focus {
             background: linear-gradient(90deg, #f44336 40%, #ff9800 100%);
             transform: translateY(-2px) scale(1.04);
             box-shadow: 0 6px 18px 0 rgba(244,67,54,0.15);
             outline: none;
         }
-        #message {
-            text-align: center;
-            font-weight: bold;
-            margin-top: 10px;
-            color: #2980b9;
+        .select-container {
+            position: relative;
+            display: inline-block;
         }
-        /* Responsive pour mobile */
+        .select-container::after {
+            content: "▼";
+            color: #fff;
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 16px;
+        }
+        .comparison {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .car-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
         @media (max-width: 600px) {
             #navbar ul {
                 flex-direction: column;
@@ -100,23 +103,10 @@
             #navbar ul li {
                 margin: 0.5em 0;
             }
-            .container {
+            .comparison {
                 flex-direction: column;
-                margin-top: 20px;
-                gap: 10px;
-            }
-            .voiture {
-                width: 94vw;
-                max-width: 340px;
-                height: 26vw;
-                min-height: 100px;
-                max-height: 150px;
-            }
-            button {
-                width: 90vw;
-                max-width: 340px;
-                font-size: 1em;
-                padding: 12px 0;
+                gap: 20px;
+                align-items: center;
             }
         }
     </style>
@@ -130,29 +120,89 @@
         </ul>
     </nav>
     <h1>Galerie de voitures</h1>
-    <div class="container" id="images-voitures">
-        <img class="voiture" src="images.jpg" alt="Peugeot" onclick="selectionnerVoiture('peugeot', this)">
-        <img class="voiture" src="images1.jpg" alt="Renault" onclick="selectionnerVoiture('renault', this)">
-        <img class="voiture" src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="BMW" onclick="selectionnerVoiture('bmw', this)">
-    </div>
-    <button onclick="voirInfoVoiture()">Voir les infos voiture choisie</button>
-    <div id="message"></div>
+
+    <!-- Comparateur de voitures -->
+    <section id="comparateur-section" style="margin-top:40px;">
+        <h2 style="text-align:center;">Comparateur de voitures</h2>
+        <div style="text-align:center;">
+            <span class="select-container">
+                <select id="car1-select" class="select-styled">
+                    <option value="">-- Choisir voiture 1 --</option>
+                </select>
+            </span>
+            <span class="select-container">
+                <select id="car2-select" class="select-styled">
+                    <option value="">-- Choisir voiture 2 --</option>
+                </select>
+            </span>
+        </div>
+        <div class="comparison">
+            <div id="car1-info" class="car-info"></div>
+            <div id="car2-info" class="car-info"></div>
+        </div>
+    </section>
+    <!-- Fin comparateur -->
+
     <script>
-        let voitureSelectionnee = null;
-        function selectionnerVoiture(nom, imgElement) {
-            voitureSelectionnee = nom;
-            document.querySelectorAll('#images-voitures img').forEach(img => {
-                img.classList.remove('selected');
-            });
-            imgElement.classList.add('selected');
-            document.getElementById('message').textContent = 'Voiture sélectionnée : ' + imgElement.alt;
-        }
-        function voirInfoVoiture() {
-            if (voitureSelectionnee) {
-                window.location.href = 'autrepage.html?car=' + voitureSelectionnee;
-            } else {
-                document.getElementById('message').textContent = 'Veuillez d\'abord sélectionner une voiture.';
+        // === Comparateur de voitures ===
+        const voitures = [
+            {
+                nom: "Peugeot 208",
+                puissance: "130 ch",
+                annee: 2022,
+                prix: "23 000 €"
+            },
+            {
+                nom: "Renault Clio",
+                puissance: "100 ch",
+                annee: 2021,
+                prix: "19 500 €"
+            },
+            {
+                nom: "BMW M4 Competition",
+                puissance: "510 ch",
+                annee: 2016,
+                prix: "85 000 €"
             }
+        ];
+
+        const car1Select = document.getElementById("car1-select");
+        const car2Select = document.getElementById("car2-select");
+
+        function populateSelectComparateur(select) {
+            voitures.forEach((car, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = car.nom;
+                select.appendChild(option);
+            });
+        }
+
+        function displayCarInfoComparateur(index, elementId) {
+            const container = document.getElementById(elementId);
+            if (index === "" || index === null) {
+                container.innerHTML = "";
+                return;
+            }
+            const car = voitures[index];
+            container.innerHTML = `
+                <h3>${car.nom}</h3>
+                <p><strong>Puissance :</strong> ${car.puissance}</p>
+                <p><strong>Année :</strong> ${car.annee}</p>
+                <p><strong>Prix :</strong> ${car.prix}</p>
+            `;
+        }
+
+        if (car1Select && car2Select) {
+            car1Select.addEventListener("change", () => {
+                displayCarInfoComparateur(car1Select.value, "car1-info");
+            });
+            car2Select.addEventListener("change", () => {
+                displayCarInfoComparateur(car2Select.value, "car2-info");
+            });
+
+            populateSelectComparateur(car1Select);
+            populateSelectComparateur(car2Select);
         }
     </script>
 </body>
