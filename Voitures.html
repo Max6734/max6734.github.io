@@ -182,9 +182,9 @@
     <h1>Galerie de voitures</h1>
 
     <div class="container">
-        <img class="voiture" src="images.jpg" alt="Peugeot 208" data-link="peugeot208.html">
-        <img class="voiture" src="images1.jpg" alt="Renault Clio" data-link="renaultclio.html">
-        <img class="voiture" src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="BMW M4" data-link="bmwm4.html">
+        <img class="voiture" src="images.jpg" alt="Peugeot 208">
+        <img class="voiture" src="images1.jpg" alt="Renault Clio">
+        <img class="voiture" src="bmw_m4competitionmxdrivecp2fb_concept.jpg" alt="BMW M4">
     </div>
     <div style="text-align: center;">
         <button id="voirInfoBtn" class="voir-info-btn" disabled>Voir les informations</button>
@@ -228,8 +228,8 @@
         });
         btn.addEventListener('click', () => {
             if (selected) {
-                // Redirige vers la page spécifique à la voiture sélectionnée
-                window.location.href = selected.getAttribute('data-link');
+                // Redirige toujours vers autrepage.html
+                window.location.href = 'autrepage.html';
             }
         });
 
