@@ -226,12 +226,25 @@
                 selected = voiture;
             });
         });
-        btn.addEventListener('click', () => {
-            if (selected) {
-                // Redirige toujours vers autrepage.html
-                window.location.href = 'autrepage.html';
-            }
-        });
+      btn.addEventListener('click', () => {
+    if (selected) {
+        let carParam = '';
+        switch (selected.alt) {
+            case "Peugeot 208":
+                carParam = 'peugeot';
+                break;
+            case "Renault Clio":
+                carParam = 'renault';
+                break;
+            case "BMW M4":
+                carParam = 'bmw';
+                break;
+        }
+        if (carParam) {
+            window.location.href = `autrepage.html?car=${carParam}`;
+        }
+    }
+});
 
         // === Comparateur de voitures ===
         const voituresData = [
