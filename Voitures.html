@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-           background-image: url('car_logo_converted.jpg');
+          background-image: url('car_logo_converted.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -14,6 +14,13 @@
             margin: 0;
             padding-top: 70px; 
             font-family: Arial, sans-serif;
+        }
+        #background-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.4); 
+            z-index: 0;
+            pointer-events: none;
         }
         #navbar {
             position: fixed;
