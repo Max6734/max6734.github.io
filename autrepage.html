@@ -58,25 +58,7 @@
                 width: 94vw;
                 max-width: 340px;
             }
-            .voiture-rose-flex {
-    display: flex;
-    align-items: flex-start;
-    gap: 32px;
-}
-.voiture-rose-img {
-    flex-shrink: 0;
-}
-.voiture-rose-texte {
-    flex: 1;
-}
-@media (max-width: 800px) {
-    .voiture-rose-flex {
-        flex-direction: column;
-        align-items: center;
-    }
-    .voiture-rose-img {
-        margin-bottom: 18px;
-    }
+            
 }
         }
     </style>
@@ -164,10 +146,6 @@
 
             if (car === "voiture_rose") {
                 infoDiv.innerHTML = `
-                   <div class="voiture-rose-flex">
-                   <div class="voiture-rose-img">
-                    <img src="voiture_rose.jpg" alt="Obsidian Seraph X" style="max-width:220px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);" />
-                </div>
                     <h2>🚗 Obsidian Seraph X</h2>
                     <p><strong>Type :</strong> ${info.type}</p>
                     <p><strong>Année :</strong> ${info.annee} (concept imaginaire)</p>
