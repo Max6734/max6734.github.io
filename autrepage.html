@@ -29,60 +29,109 @@
     <div id="info-voiture"></div>
     <div id="image-principale"></div>
 
-    <script>
-        // Récupère les paramètres de l'URL
-        const params = new URLSearchParams(window.location.search);
-        const car = params.get('car');
+ <script>
+    // Récupère les paramètres de l'URL
+    const params = new URLSearchParams(window.location.search);
+    const car = params.get('car');
 
-        // Informations sur les voitures
-// Informations sur les voitures
-const carsInfo = {
-    peugeot: {
-        marque: "Peugeot",
-        modele: "208",
-        annee: 2022,
-        couleur: "Bleu",
-        prix: "23 000 €",
-        puissance: "130 ch"
-    },
-    renault: {
-        marque: "Renault",
-        modele: "Clio",
-        annee: 2021,
-        couleur: "Rouge",
-        prix: "19 500 €",
-        puissance: "100 ch"
-    },
-    bmw: {
-        marque: "BMW",
-        modele: "M4 Competition",
-        annee: 2016,
-        couleur: "Tanzanite Blue",
-        prix: "85 000 €",
-        puissance: "510 ch"
-    },
-    rose: {
-        marque: "Obsidian",
-        modele: "Seraph X",
-        annee: 2023,
-        couleur: "Rose",
-        prix: "120 000 €",
-        puissance: "250 ch"
-    }
-};
+    // Informations sur les voitures
+    const carsInfo = {
+        peugeot: {
+            marque: "Peugeot",
+            modele: "208",
+            annee: 2022,
+            couleur: "Bleu",
+            prix: "23 000 €",
+            puissance: "130 ch"
+        },
+        renault: {
+            marque: "Renault",
+            modele: "Clio",
+            annee: 2021,
+            couleur: "Rouge",
+            prix: "19 500 €",
+            puissance: "100 ch"
+        },
+        bmw: {
+            marque: "BMW",
+            modele: "M4 Competition",
+            annee: 2016,
+            couleur: "Tanzanite Blue",
+            prix: "85 000 €",
+            puissance: "510 ch"
+        },
+        voiture_rose: {
+            marque: "Obsidian",
+            modele: "Seraph X",
+            annee: 2025,
+            type: "Supercar Coupé",
+            design: "Mélange d'Aston Martin, McLaren et Ferrari, avec une teinte rose satinée unique",
+            moteur: "V8 Bi-Turbo 4.0L",
+            puissance: "720 chevaux",
+            couple: "850 Nm",
+            acceleration: "0-100 km/h : 3,0 secondes",
+            vmax: "330 km/h",
+            transmission: "Intégrale AWD (option RWD)",
+            boite: "Double embrayage 8 rapports",
+            prix: "320 000 € (base), jusqu'à 400 000 € avec options",
+            chassis: "Carbone & aluminium",
+            poids: "1450 kg",
+            freins: "Carbone-céramique haute performance",
+            suspension: "Active, réglable",
+            couleur: "Rose satin « Bubblegum Pearl »",
+            jantes: "21\" forgées assorties",
+            interieur: "Cuir noir & surpiqûres roses"
+        }
+    };
 
-// Images principales pour chaque voiture
-const imagesPrincipales = {
-    peugeot: 'images.jpg',
-    renault: 'images1.jpg',
-    bmw: 'bmw_m4competitionmxdrivecp2fb_concept.jpg',
-    rose: 'voiture_rose.jpg'
-};
+    // Images principales pour chaque voiture
+    const imagesPrincipales = {
+        peugeot: 'images.jpg',
+        renault: 'images1.jpg',
+        bmw: 'bmw_m4competitionmxdrivecp2fb_concept.jpg',
+        voiture_rose: 'voiture_rose.jpg'
+    };
 
-        // Affiche les informations si la voiture existe
-        if (car && carsInfo[car]) {
-            const info = carsInfo[car];
-            const div = document.getElementById('info-voiture');
+    // Affiche les informations si la voiture existe
+    if (car && carsInfo[car]) {
+        const info = carsInfo[car];
+        const div = document.getElementById('info-voiture');
+        if (car === "voiture_rose") {
+            div.innerHTML = `
+                <h2>🚗 Obsidian Seraph X</h2>
+                <p><strong>Type :</strong> ${info.type}</p>
+                <p><strong>Année :</strong> ${info.annee} (concept imaginaire)</p>
+                <p><strong>Design :</strong> ${info.design}</p>
+                <h3>🔧 Moteur & Performances</h3>
+                <ul>
+                    <li><strong>Motorisation :</strong> ${info.moteur}</li>
+                    <li><strong>Puissance :</strong> ${info.puissance}</li>
+                    <li><strong>Couple :</strong> ${info.couple}</li>
+                    <li><strong>0-100 km/h :</strong> ${info.acceleration}</li>
+                    <li><strong>Vitesse max :</strong> ${info.vmax}</li>
+                    <li><strong>Transmission :</strong> ${info.transmission}</li>
+                    <li><strong>Boîte :</strong> ${info.boite}</li>
+                </ul>
+                <h3>💰 Prix estimé</h3>
+                <ul>
+                    <li><strong>Prix de base :</strong> 320 000 €</li>
+                    <li><strong>Prix avec options et personnalisation :</strong> jusqu'à 400 000 €</li>
+                </ul>
+                <h3>⚙️ Spécifications supplémentaires</h3>
+                <ul>
+                    <li><strong>Châssis :</strong> ${info.chassis}</li>
+                    <li><strong>Poids :</strong> ${info.poids}</li>
+                    <li><strong>Freins :</strong> ${info.freins}</li>
+                    <li><strong>Suspension :</strong> ${info.suspension}</li>
+                </ul>
+                <h3>🎨 Personnalisation</h3>
+                <ul>
+                    <li><strong>Couleur :</strong> ${info.couleur}</li>
+                    <li><strong>Jantes :</strong> ${info.jantes}</li>
+                    <li><strong>Intérieur :</strong> ${info.interieur}</li>
+                </ul>
+            `;
+        } else {
             div.innerHTML = `<h2>Informations sur la voiture</h2>
                 <ul>
                     <li>Marque : ${info.marque}</li>
@@ -92,18 +141,19 @@ const imagesPrincipales = {
                     <li>Prix : ${info.prix}</li>
                     <li>Puissance : ${info.puissance}</li>
                 </ul>`;
-        } else {
-            document.getElementById('info-voiture').innerHTML = "<p>Voiture non trouvée. Vérifiez l'URL.</p>";
         }
+    } else {
+        document.getElementById('info-voiture').innerHTML = "<p>Voiture non trouvée. Vérifiez l'URL.</p>";
+    }
 
-        // Affiche l'image principale si la voiture existe
-        if (car && imagesPrincipales[car]) {
-            const imgDiv = document.getElementById('image-principale');
-            imgDiv.innerHTML = `<img src="${imagesPrincipales[car]}" alt="Photo principale" style="width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">`;
-        } else {
-            document.getElementById('image-principale').innerHTML = "";
-        }
-    </script>
+    // Affiche l'image principale si la voiture existe
+    if (car && imagesPrincipales[car]) {
+        const imgDiv = document.getElementById('image-principale');
+        imgDiv.innerHTML = `<img src="${imagesPrincipales[car]}" alt="Photo principale" style="width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">`;
+    } else {
+        document.getElementById('image-principale').innerHTML = "";
+    }
+</script>
     <button onclick="window.location.href='Voitures.html'" style="margin-top:20px;padding:10px 20px;border-radius:6px;background:#1976d2;color:white;border:none;cursor:pointer;">
     Retour à l'accueil
 </button>
