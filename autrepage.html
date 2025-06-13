@@ -35,20 +35,49 @@
         const car = params.get('car');
 
         // Informations sur les voitures
+// Informations sur les voitures
 const carsInfo = {
-    peugeot: { marque: "Peugeot", modele: "208", annee: 2022, couleur: "Bleu", prix: "23 000 €", puissance: "130 ch" },
-    renault: { marque: "Renault", modele: "Clio", annee: 2021, couleur: "Rouge", prix: "19 500 €", puissance: "100 ch" },
-    bmw: { marque: "BMW", modele: "M4 Competition", annee: 2016, couleur: "Tanzanite Blue", prix: "85 000 €", puissance: "510 ch" },
-    rose: { marque: "Obsidian", modele: "Seraph X", annee: 2023, couleur: "Rose", prix: "120 000 €", puissance: "250 ch" }
+    peugeot: {
+        marque: "Peugeot",
+        modele: "208",
+        annee: 2022,
+        couleur: "Bleu",
+        prix: "23 000 €",
+        puissance: "130 ch"
+    },
+    renault: {
+        marque: "Renault",
+        modele: "Clio",
+        annee: 2021,
+        couleur: "Rouge",
+        prix: "19 500 €",
+        puissance: "100 ch"
+    },
+    bmw: {
+        marque: "BMW",
+        modele: "M4 Competition",
+        annee: 2016,
+        couleur: "Tanzanite Blue",
+        prix: "85 000 €",
+        puissance: "510 ch"
+    },
+    rose: {
+        marque: "Obsidian",
+        modele: "Seraph X",
+        annee: 2023,
+        couleur: "Rose",
+        prix: "120 000 €",
+        puissance: "250 ch"
+    }
 };
-         // Images principales pour chaque voiture
+
+// Images principales pour chaque voiture
 const imagesPrincipales = {
     peugeot: 'images.jpg',
     renault: 'images1.jpg',
     bmw: 'bmw_m4competitionmxdrivecp2fb_concept.jpg',
     rose: 'voiture_rose.jpg'
 };
-     
 
         // Affiche les informations si la voiture existe
         if (car && carsInfo[car]) {
